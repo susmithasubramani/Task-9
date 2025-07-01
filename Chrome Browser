@@ -1,0 +1,40 @@
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class DemoBlazeTitleTest {
+    public static void main(String[] args) {
+        // Optional: Set path to chromedriver if it's not in your system PATH
+        // System.setProperty("webdriver.chrome.driver", "path/to/chromedriver");
+
+        // Step 1: Launch Chrome browser
+        WebDriver driver = new ChromeDriver();
+
+        // Step 2: Navigate to the website
+        driver.get("https://www.demoblaze.com/");
+
+        // Step 3: Maximize the browser window
+        driver.manage().window().maximize();
+
+        // Step 4: Get the page title
+        String actualTitle = driver.getTitle();
+
+        // Step 5: Compare the title with expected
+        if (actualTitle.equals("STORE")) {
+            System.out.println("Page landed on correct website");
+        } else {
+            System.out.println("Page not landed on correct website");
+        }
+
+        // Step 6: Close the browser
+        driver.quit();
+    }
+}
+
+
+<dependencies>
+    <dependency>
+        <groupId>org.seleniumhq.selenium</groupId>
+        <artifactId>selenium-java</artifactId>
+        <version>4.20.0</version>
+    </dependency>
+</dependencies>
