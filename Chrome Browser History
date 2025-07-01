@@ -1,0 +1,49 @@
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class WikipediaSearchAutomation {
+    public static void main(String[] args) {
+        // Set the path to your ChromeDriver if not in system PATH
+        System.setProperty("webdriver.chrome.driver", "path/to/chromedriver");
+
+        // Initialize the ChromeDriver
+        WebDriver driver = new ChromeDriver();
+
+        try {
+            // Navigate to Wikipedia
+            driver.get("https://www.wikipedia.org/");
+
+            // Maximize the browser window
+            driver.manage().window().maximize();
+
+            // Locate search input, enter "Artificial Intelligence", and submit
+            WebElement searchInput = driver.findElement(By.id("searchInput"));
+            searchInput.sendKeys("Artificial Intelligence");
+            searchInput.submit();
+
+            // Wait for the page to load and locate the "History" section link
+            Thread.sleep(2000); // use WebDriverWait in production code
+
+            // Scroll to "History" section and click it
+            WebElement historyLink = driver.findElement(By.cssSelector("a[href='#History']"));
+            historyLink.click();
+
+            // Wait for navigation
+            Thread.sleep(1000);
+
+            // Get the "History" section heading
+            WebElement historyHeading = driver.findElement(By.id("History"));
+            WebElement headingTitle = historyHeading.findElement(By.xpath("..")); // Get parent heading element
+
+            System.out.println("Section Title: " + headingTitle.getText());
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            // Close the browser
+            driver.quit();
+        }
+    }
+}
